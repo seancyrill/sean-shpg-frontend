@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "main";
+  src: url("/fonts/KumbhSans.ttf");
+}
+
+@font-face {
+  font-family: "logo";
+  src: url("/fonts/Monoton-Regular.ttf");
+}
+
+@layer base {
+  :root {
+    --Orange: 26 100% 55%;
+    --Green: 131 50% 43%;
+    --Red: 0 72% 51%;
+    --Soft-Red: 358 79% 66%;
+    --Pale-orange: 25 100% 94%;
+    --Moderate-blue: 238 40% 52%;
+    --Very-dark-blue: 220 13% 13%;
+    --Dark-grayish-blue: 219 9% 45%;
+    --Grayish-blue: 220 14% 75%;
+    --Light-grayish-blue: 223 64% 98%;
+    --White: 0 0% 100%;
+    --Black: 0 0% 0%;
+  }
+
+  /* removes arrow buttons on number inputs  */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+}
+
+@layer components {
+  .grid-auto {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+  .grid-auto-lg {
+    grid-template-columns: repeat(auto-fit, minmax(min(335px, 100%), 1fr));
+  }
+  .grid-auto-sm {
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+  }
+
+  .smooth-animation {
+    @apply transition duration-300 ease-in-out;
+  }
+
+  .navHover {
+    @apply smooth-animation border-b-4 border-b-Black hover:border-b-Orange;
+  }
+
+  .primary-button {
+    @apply smooth-animation rounded-sm bg-Orange px-4 py-2 text-White hover:scale-105;
+  }
+
+  .secondary-button {
+    @apply smooth-animation whitespace-nowrap rounded-sm bg-Very-dark-blue px-4 py-2 shadow-md hover:scale-105;
+  }
+
+  .off-screen {
+    @apply absolute -translate-x-[200vw];
+  }
+
+  .input-field {
+    @apply rounded-sm border border-Very-dark-blue px-4 py-2;
+  }
+}
+
+.transition-height {
+  transition-property: height;
+}
+
+.duration-3000 {
+  transition-duration: 3s;
+}
+
+.ease-out {
+  transition-timing-function: ease-out;
+}
