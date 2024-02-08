@@ -1,4 +1,4 @@
-import { userAddressObjType } from "./AddressType";
+import { userAddressObjType } from "../pages/UserControls/UserInfo/Addresses";
 import { CartItemInfoType } from "./ShoppingCartContextTypes";
 
 export type OrderItemType = CartItemInfoType & {

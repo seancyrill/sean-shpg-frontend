@@ -1,12 +1,12 @@
 import { isAxiosError } from "axios";
 import { useAuthContext } from "../../context/AuthContext";
-import { userAddressObjType } from "../../pages/UserControls/UserInfo/Addresses";
 import GenericDelete from "../GenericDelete";
+import { userAddressObjType } from "../../pages/UserControls/UserInfo/Addresses";
 
 type DeleteAddressType = {
   address_id: number;
   isDefault: boolean;
-  setAddressData: React.Dispatch<React.SetStateAction<userAddressObjType>>;
+  setAddressData: React.Dispatch<React.SetStateAction<userAddressObjType[]>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
