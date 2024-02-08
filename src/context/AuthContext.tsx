@@ -65,7 +65,7 @@ export function AuthProvider({ children }: ProviderType) {
   };
 
   //// request handlers ////
-  const base_URL = "http://localhost:3500/";
+  const base_URL = import.meta.env.API_URL;
   //for public req
   const basicReq = axios.create({
     baseURL: base_URL,
