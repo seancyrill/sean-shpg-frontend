@@ -13,7 +13,7 @@ disableReactDevTools();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter basename="/sean-shpg">
+    <BrowserRouter basename="/">
       <AuthProvider>
         <ShoppingCartProvider>
           <Routes>
