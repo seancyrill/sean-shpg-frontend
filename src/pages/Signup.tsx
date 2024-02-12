@@ -48,12 +48,10 @@ export default function signUp() {
   async function handleSubmit() {
     try {
       const register = await basicReq.post("/users", signUpInput);
-      console.log(register.data);
       setNewId(register.data);
       setLoading(true);
       if (register.status === 201) {
         const login = await privateReq.post("/auth/", signUpInput);
-        console.log(login);
         setToken(login.data.accessToken);
         setSignUpInput(emptyInput);
         setError(null);
@@ -90,7 +88,6 @@ export default function signUp() {
   //password format checker
   useEffect(() => {
     const testInput = PWD_REGEX.test(signUpInput.password);
-    console.log(testInput);
     const passwordErr = "Invalid password format";
 
     if (testInput) {

@@ -9,10 +9,10 @@ function UserControls() {
   const onUserSettings = location.pathname.startsWith("/controls/user");
 
   useEffect(() => {
-    if (!token) {
+    if (!token && !authLoading) {
       navigate("/registrar/login", { state: location.pathname });
     }
-  }, [token]);
+  }, [token, authLoading]);
 
   return (
     <>
