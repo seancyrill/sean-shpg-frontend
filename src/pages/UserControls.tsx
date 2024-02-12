@@ -42,13 +42,9 @@ function UserControls() {
         <div></div>
       </aside>
 
-      {!authLoading && (
-        <section className="relative mx-2 mb-2 flex flex-1 flex-col border-[1px] bg-White">
-          <Outlet />
-        </section>
-      )}
-
-      <LoadingSpinner loading={authLoading} />
+      <section className="relative mx-2 mb-2 flex flex-1 flex-col border-[1px] bg-White">
+        {authLoading ? <LoadingSpinner loading={authLoading} /> : <Outlet />}
+      </section>
     </>
   );
 }
