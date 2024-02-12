@@ -84,7 +84,7 @@ export function AuthProvider({ children }: ProviderType) {
   //for req with token
   const privateReq = axios.create({
     baseURL: base_URL,
-    timeout: 1000,
+    timeout: 5000,
     headers: {
       "Content-type": "application/json",
     },
@@ -109,13 +109,15 @@ export function AuthProvider({ children }: ProviderType) {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
-        if (error?.response?.status === 403 && !prevRequest?.sent) {
+        if (
+          error?.response?.status === 403 &&
+          prevRequest?.sent !== undefined &&
+          !prevRequest.sent
+        ) {
           prevRequest.sent = true; //breaks the loop
           const newToken = await refreshAccessToken();
           //retry request after refreshing token
-          console.log({ old: prevRequest.headers["authorization"] });
           prevRequest.headers["authorization"] = `Bearer ${newToken}`;
-          console.log({ new: prevRequest.headers["authorization"] });
           return privateReq(prevRequest);
         }
         return Promise.reject(error);

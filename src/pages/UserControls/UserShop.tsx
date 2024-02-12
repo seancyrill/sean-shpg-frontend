@@ -35,7 +35,6 @@ function UserShop() {
   const location = useLocation();
 
   async function fetchShopInfo(signal: AbortSignal) {
-    console.log();
     if (!shop_id) return;
     try {
       const response = await privateReq.get("/shops/private", {
@@ -76,6 +75,7 @@ function UserShop() {
       controller.abort();
     };
   }, [shop_id]);
+
   //refetch on shop page reload
   useEffect(() => {
     const controller = new AbortController();
