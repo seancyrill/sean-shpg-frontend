@@ -17,7 +17,7 @@ export function useAuthContext() {
 
 //context starts here
 export function AuthProvider({ children }: ProviderType) {
-  const [authLoading, setAuthLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
   const [token, setToken] = useState<tokenStateType>(null);
   const {
     user_id,

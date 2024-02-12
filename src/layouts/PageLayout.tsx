@@ -1,36 +1,23 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import CartError from "../components/fetchError";
 import LoadingSpinner from "../components/LoadingSpinner";
 import SecondNav from "../components/SecondNav";
 
 export default function PageLayout() {
-  const { refreshAccessToken, fetchErrModal, setFetchErrModal } =
+  const { refreshAccessToken, fetchErrModal, setFetchErrModal, authLoading } =
     useAuthContext();
 
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
-    const verifyRefresh = async () => {
-      setIsLoading(true);
-      try {
-        await refreshAccessToken();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    verifyRefresh();
+    refreshAccessToken();
   }, []);
 
   return (
     <>
-      <LoadingSpinner loading={isLoading} />
+      <LoadingSpinner loading={authLoading} />
       <header>
         <Nav />
         <SecondNav />
