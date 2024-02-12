@@ -65,6 +65,9 @@ export function AuthProvider({ children }: ProviderType) {
         if (error.response?.data?.message === "Token expired") {
           return handleLogOut();
         }
+        if (error.response?.data?.message === "No cookie found") {
+          return;
+        }
         console.error(error.response?.data?.message);
       } else {
         console.error(error);
@@ -87,22 +90,21 @@ export function AuthProvider({ children }: ProviderType) {
     timeout: 5000,
     headers: {
       "Content-type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     withCredentials: true,
   });
 
   //interceptors
   useEffect(() => {
-    //attach token to req
+    /* //attach token to req
     const requestIntercept = privateReq.interceptors.request.use(
       (config) => {
-        if (!config.headers["authorization"]) {
-          config.headers["authorization"] = `Bearer ${token}`;
-        }
+        config.headers["authorization"] = `Bearer ${token}`;
         return config;
       },
       (error) => Promise.reject(error)
-    );
+    ); */
 
     //refresh token upon access token exp
     const responseIntercept = privateReq.interceptors.response.use(
@@ -125,7 +127,7 @@ export function AuthProvider({ children }: ProviderType) {
     );
     //cleanup
     return () => {
-      privateReq.interceptors.request.eject(requestIntercept);
+      //privateReq.interceptors.request.eject(requestIntercept);
       privateReq.interceptors.response.eject(responseIntercept);
     };
   }, [token, refreshAccessToken]);
