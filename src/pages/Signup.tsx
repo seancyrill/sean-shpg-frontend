@@ -151,7 +151,7 @@ export default function signUp() {
               <div className="input-field flex items-center gap-1 pr-1">
                 <input
                   required
-                  className="h-full w-full"
+                  className="h-full w-full border-none"
                   placeholder="Password"
                   type={showPw ? "text" : "password"}
                   value={signUpInput.password}
