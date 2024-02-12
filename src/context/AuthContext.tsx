@@ -96,8 +96,8 @@ export function AuthProvider({ children }: ProviderType) {
     //attach token to req
     const requestIntercept = privateReq.interceptors.request.use(
       (config) => {
-        if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${token}`;
+        if (!config.headers["authorization"]) {
+          config.headers["authorization"] = `Bearer ${token}`;
         }
         return config;
       },
@@ -113,7 +113,9 @@ export function AuthProvider({ children }: ProviderType) {
           prevRequest.sent = true; //breaks the loop
           const newToken = await refreshAccessToken();
           //retry request after refreshing token
-          prevRequest.headers["Authorization"] = `Bearer ${newToken}`;
+          console.log({ old: prevRequest.headers["authorization"] });
+          prevRequest.headers["authorization"] = `Bearer ${newToken}`;
+          console.log({ new: prevRequest.headers["authorization"] });
           return privateReq(prevRequest);
         }
         return Promise.reject(error);
