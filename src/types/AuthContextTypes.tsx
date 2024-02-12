@@ -19,6 +19,8 @@ export type userInfoType = {
 };
 
 export type AuthContextType = userInfoType & {
+  authLoading: boolean;
+  setAuthLoading: React.Dispatch<React.SetStateAction<boolean>>;
   token: tokenStateType;
   setToken: React.Dispatch<React.SetStateAction<tokenStateType>>;
   refreshAccessToken: () => Promise<any>;

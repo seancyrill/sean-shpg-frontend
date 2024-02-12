@@ -2,9 +2,17 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Login() {
-  const { token, setToken, privateReq } = useAuthContext();
+  const {
+    token,
+    setToken,
+    privateReq,
+    authLoading,
+    setAuthLoading,
+    setFetchErrModal,
+  } = useAuthContext();
   const [error, setError] = useState(null);
 
   const emptyInput = { username: "", password: "" };
@@ -19,15 +27,14 @@ export default function Login() {
   const from = location.state || "/";
 
   async function handleSubmit(input: typeof loginInput) {
+    let success = false;
+    setAuthLoading(true);
     try {
       const response = await privateReq.post("/auth", input);
       setToken(response.data.accessToken);
       setLoginInput(emptyInput);
       setError(null);
-      setTimeout(() => {
-        //prevents redirecting too fast and fail
-        navigate(from, { replace: true });
-      }, 100);
+      success = true;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error(error.message);
@@ -35,6 +42,14 @@ export default function Login() {
       } else {
         console.error(error);
       }
+      setFetchErrModal(true);
+    } finally {
+      if (success) {
+        //setTimeout(() => {
+        navigate(from, { replace: true });
+        //}, 100);
+      }
+      setAuthLoading(false);
     }
   }
 
@@ -108,6 +123,8 @@ export default function Login() {
           Create new Account
         </Link>
       </div>
+
+      <LoadingSpinner loading={authLoading} />
     </div>
   );
 }

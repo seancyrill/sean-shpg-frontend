@@ -17,6 +17,7 @@ export function useAuthContext() {
 
 //context starts here
 export function AuthProvider({ children }: ProviderType) {
+  const [authLoading, setAuthLoading] = useState(false);
   const [token, setToken] = useState<tokenStateType>(null);
   const {
     user_id,
@@ -33,6 +34,7 @@ export function AuthProvider({ children }: ProviderType) {
   //higher context tree to use on logout
   const userCartMounted = useRef(false);
   const handleLogOut = async () => {
+    setAuthLoading(true);
     try {
       await privateReq.post("/auth/logout");
       setToken(null);
@@ -43,10 +45,14 @@ export function AuthProvider({ children }: ProviderType) {
       } else {
         console.error(error);
       }
+      setFetchErrModal(true);
+    } finally {
+      setAuthLoading(false);
     }
   };
 
   const refreshAccessToken = async () => {
+    setAuthLoading(true);
     try {
       const response = await privateReq.get("/auth/refresh");
       const newToken = response.data.accessToken;
@@ -61,6 +67,9 @@ export function AuthProvider({ children }: ProviderType) {
       } else {
         console.error(error);
       }
+      setFetchErrModal(true);
+    } finally {
+      setAuthLoading(false);
     }
   };
 
@@ -118,6 +127,8 @@ export function AuthProvider({ children }: ProviderType) {
   return (
     <AuthContext.Provider
       value={{
+        authLoading,
+        setAuthLoading,
         token,
         setToken,
         user_id,

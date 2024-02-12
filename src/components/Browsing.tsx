@@ -135,7 +135,7 @@ export default function Browsing({
           </div>
         </>
       ) : (
-        <div className="m-auto p-8 text-center">
+        <div className={`m-auto p-8 text-center ${isLoading && "hidden"}`}>
           No items matched your search
         </div>
       )}

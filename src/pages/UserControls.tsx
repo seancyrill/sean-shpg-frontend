@@ -1,9 +1,10 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import { useEffect } from "react";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function UserControls() {
-  const { token, shop_id } = useAuthContext();
+  const { token, shop_id, authLoading } = useAuthContext();
   const navigate = useNavigate();
   const location = useLocation();
   const onUserSettings = location.pathname.startsWith("/controls/user");
@@ -41,9 +42,13 @@ function UserControls() {
         <div></div>
       </aside>
 
-      <section className="relative mx-2 mb-2 flex flex-1 flex-col border-[1px] bg-White">
-        <Outlet />
-      </section>
+      {!authLoading && (
+        <section className="relative mx-2 mb-2 flex flex-1 flex-col border-[1px] bg-White">
+          <Outlet />
+        </section>
+      )}
+
+      <LoadingSpinner loading={authLoading} />
     </>
   );
 }
