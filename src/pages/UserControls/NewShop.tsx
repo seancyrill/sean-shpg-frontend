@@ -55,8 +55,9 @@ function NewShop() {
       setSuccess(true);
     } catch (error) {
       if (isAxiosError(error)) {
-        console.error(error.message);
-        setError(error.response?.data.message);
+        if (error.config?.signal?.aborted) return;
+        console.error(error.response?.data);
+        setError(error.response?.data?.message);
       } else {
         console.error(error);
       }

@@ -57,9 +57,9 @@ function NewItem() {
       setShowModal(true);
     } catch (error) {
       if (isAxiosError(error)) {
-        error.response?.status === 401
-          ? setError(error.response?.data?.message)
-          : console.error(error.response?.data);
+        if (error.config?.signal?.aborted) return;
+        console.error(error.response?.data);
+        setError(error.response?.data?.message);
       } else {
         console.error(error);
       }

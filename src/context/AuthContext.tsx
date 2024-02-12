@@ -33,6 +33,7 @@ export function AuthProvider({ children }: ProviderType) {
 
   //higher context tree to use on logout
   const userCartMounted = useRef(false);
+
   const handleLogOut = async () => {
     setAuthLoading(true);
     try {
@@ -60,8 +61,9 @@ export function AuthProvider({ children }: ProviderType) {
       return newToken;
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        if (error.config?.signal?.aborted) return;
         if (error.response?.data?.message === "Token expired") {
-          handleLogOut();
+          return handleLogOut();
         }
         console.error(error.response?.data?.message);
       } else {

@@ -65,7 +65,7 @@ function EditItem() {
           console.error(error.response?.data);
           setError(error.response?.data?.message);
         } else {
-          +console.error(error);
+          console.error(error);
         }
       } finally {
         setLoading(false);
