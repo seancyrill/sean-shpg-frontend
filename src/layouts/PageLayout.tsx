@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
@@ -11,9 +11,20 @@ export default function PageLayout() {
   const { refreshAccessToken, fetchErrModal, setFetchErrModal, authLoading } =
     useAuthContext();
 
+  //fetch credentials
   useEffect(() => {
     refreshAccessToken();
   }, []);
+
+  //scrolls to top everytime the route changes
+  const location = useLocation();
+  const { pathname, state } = location;
+  useEffect(() => {
+    //doesnt scroll to top if user clicks back
+    if (state === pathname) return;
+
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>
