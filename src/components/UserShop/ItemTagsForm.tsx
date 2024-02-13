@@ -76,7 +76,7 @@ function ItemTagsForm({ item_tags, input, setInput }: ItemTagsFormType) {
         <input
           type="text"
           ref={tagRef}
-          className={`min-w-0 flex-1 ${
+          className={`min-w-0 flex-1 border focus:outline-none ${
             item_tags.length > 0 && "border"
           } border-Grayish-blue px-2`}
           value={tagInput}

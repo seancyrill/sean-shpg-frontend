@@ -104,9 +104,10 @@ function ShopItemForm({
         <h2>Be as descriptive as possible.</h2>
 
         <label className="off-screen">Name</label>
-        <div className="input-field flex items-center justify-between gap-2">
+        <div className="input-field flex items-center gap-1 pr-1">
           <input
             required
+            className="w-full border-none focus:outline-none"
             type="text"
             ref={nameRef}
             value={item_name}
@@ -114,7 +115,7 @@ function ShopItemForm({
             onChange={(e) => setInput({ ...input, item_name: e.target.value })}
           />
           <button
-            className="rounded-full bg-Grayish-blue px-2 text-sm text-White"
+            className="mr-2 rounded-full bg-Grayish-blue px-2 text-sm text-White"
             onClick={(e) => (e.preventDefault(), setNameTip((prev) => !prev))}
           >
             i
@@ -129,9 +130,10 @@ function ShopItemForm({
         )}
 
         <label className="off-screen">Price</label>
-        <div className="input-field flex items-center justify-between gap-2">
+        <div className="input-field flex items-center gap-1 pr-1">
           <input
             required
+            className="w-full border-none focus:outline-none"
             type="text"
             value={
               priceString.endsWith(".") ? `${priceDisplay}.` : priceDisplay
@@ -141,7 +143,7 @@ function ShopItemForm({
           />
 
           <button
-            className="rounded-full bg-Grayish-blue px-2 text-sm text-White"
+            className="mr-2 rounded-full bg-Grayish-blue px-2 text-sm text-White"
             onClick={(e) => (e.preventDefault(), setPriceTip((prev) => !prev))}
           >
             i

@@ -24,8 +24,9 @@ function ItemAttributesForm({
   const valueRef = useRef<HTMLInputElement>(null);
 
   function addAttr() {
-    if (!attributeInput.attribute_name && !attributeInput.attribute_value)
+    if (!attributeInput.attribute_name || !attributeInput.attribute_value)
       return;
+
     //check for duplicates
     if (
       item_attributes?.some(
@@ -111,10 +112,10 @@ function ItemAttributesForm({
           "hidden"
         }`}
       >
-        <div className="flex flex-col gap-1 ">
+        <div className="flex w-full flex-col gap-1">
           <input
             type="text"
-            className={`min-w-0 border border-Grayish-blue ${
+            className={`w-full border border-Grayish-blue ${
               item_attributes && "border"
             } border-Grayish-blue px-2`}
             placeholder={`Name`}
@@ -130,7 +131,7 @@ function ItemAttributesForm({
           <input
             type="text"
             ref={valueRef}
-            className={`min-w-0 border border-Grayish-blue ${
+            className={`w-full border border-Grayish-blue ${
               item_attributes && "border"
             } border-Grayish-blue px-2`}
             placeholder={`Value`}

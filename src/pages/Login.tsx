@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { ReactSVG } from "react-svg";
 
 export default function Login() {
   const {
@@ -14,6 +15,7 @@ export default function Login() {
     setFetchErrModal,
   } = useAuthContext();
   const [error, setError] = useState(null);
+  const [showPw, setShowPw] = useState(false);
 
   const emptyInput = { username: "", password: "" };
   const [loginInput, setLoginInput] = useState(emptyInput);
@@ -86,17 +88,24 @@ export default function Login() {
               setLoginInput({ ...loginInput, username: e.target.value })
             }
           />
-          <label className="off-screen">Password</label>
-          <input
-            required
-            className="input-field"
-            placeholder="Password"
-            type="password"
-            value={loginInput.password}
-            onChange={(e) =>
-              setLoginInput({ ...loginInput, password: e.target.value })
-            }
-          />
+          <div className="input-field flex items-center gap-1 pr-1">
+            <label className="off-screen">Password</label>
+            <input
+              required
+              className="w-full border-none focus:outline-none"
+              placeholder="Password"
+              type={showPw ? "text" : "password"}
+              value={loginInput.password}
+              onChange={(e) =>
+                setLoginInput({ ...loginInput, password: e.target.value })
+              }
+            />
+            <ReactSVG
+              src={`/svg/icon-show-${showPw ? "off" : "on"}.svg`}
+              className="smooth-animation cursor-pointer fill-Grayish-blue p-1 hover:fill-Orange"
+              onClick={() => setShowPw((prev) => !prev)}
+            />
+          </div>
           {error && (
             <p className="border border-Soft-Red px-4 py-2 text-Soft-Red">
               {error}

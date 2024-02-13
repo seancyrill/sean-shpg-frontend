@@ -70,7 +70,7 @@
   }
 
   .input-field {
-    @apply rounded-sm border border-Very-dark-blue px-4 py-2;
+    @apply rounded-sm border border-Very-dark-blue px-4 py-2 focus:outline-none;
   }
 }
 

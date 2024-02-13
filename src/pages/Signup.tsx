@@ -151,15 +151,13 @@ export default function signUp() {
               <div className="input-field flex items-center gap-1 pr-1">
                 <input
                   required
-                  className="h-full w-full border-none"
+                  className="w-full border-none focus:outline-none"
                   placeholder="Password"
                   type={showPw ? "text" : "password"}
                   value={signUpInput.password}
                   onChange={(e) =>
                     setSignUpInput({ ...signUpInput, password: e.target.value })
                   }
-                  //onFocus={() => setPasswordFocus(true)}
-                  //onBlur={() => setPasswordFocus(false)}
                 />
                 <ReactSVG
                   src={`/svg/icon-show-${showPw ? "off" : "on"}.svg`}
@@ -189,7 +187,7 @@ export default function signUp() {
               <div className="input-field flex items-center gap-1 pr-1">
                 <input
                   required
-                  className="h-full w-full"
+                  className="w-full border-none focus:outline-none"
                   placeholder="Confirm Password"
                   type={showCPw ? "text" : "password"}
                   value={signUpInput.confirmPw}

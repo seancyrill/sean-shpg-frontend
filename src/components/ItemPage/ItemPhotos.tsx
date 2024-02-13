@@ -70,7 +70,7 @@ export default function ItemImages({
 
       <dialog
         ref={fullScreen}
-        className="min-w-[100vw] bg-transparent backdrop:bg-Very-dark-blue backdrop:opacity-75 md:min-w-0"
+        className="min-w-[100vw] bg-transparent focus:border-none focus:outline-none md:min-w-0"
       >
         <div className="grid place-content-center">
           <div

@@ -19,7 +19,7 @@ function LoadingSpinner({ loading }: LoadingSpinnerType) {
     <>
       {
         <dialog
-          className="h-[320px] w-[320px] place-content-center rounded-full p-8"
+          className="h-[320px] w-[320px] place-content-center rounded-full p-8 focus:border-none focus:outline-none"
           ref={modalRef}
         >
           <div className="grid h-full place-content-center">
