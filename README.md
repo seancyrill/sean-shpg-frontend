@@ -1,10 +1,10 @@
-### SHOPPING by Sean
+# SHOPPING by Sean
 
 Welcome! This repository is for SHOPPING, an ecommerce site! It serves as a comprehensive solution for both buyers and sellers, enabling users to purchase items from various shops while also providing the functionality for users to set up their own shops.
 
 ## Features
 
-# User:
+#### User:
 
 - Create account
 - Keep signed in for 7 days
@@ -12,7 +12,7 @@ Welcome! This repository is for SHOPPING, an ecommerce site! It serves as a comp
 - Save delivery addresses
 - Supports any device type and resolution
 
-# Buyer:
+#### Buyer:
 
 - Browse through a wide range of products offered by different sellers
 - Add items to the shopping cart and proceed to checkout even before logging in
@@ -22,7 +22,7 @@ Welcome! This repository is for SHOPPING, an ecommerce site! It serves as a comp
 - Search items by names or tags
 - Enjoy product discounts
 
-# Seller:
+#### Seller:
 
 - Set up a shop custom name and shop photo.
 - Edit shop settings
@@ -31,13 +31,13 @@ Welcome! This repository is for SHOPPING, an ecommerce site! It serves as a comp
 
 ## Technologies Used
 
-# Frontend:
+#### Frontend:
 
 - React
 - TypeScript
 - Tailwind CSS
 
-# Backend (not included in this repository):
+#### Backend (not included in this repository):
 
 [Backend Repository](https://github.com/seancyrill/sean-shpg-backend)
 
@@ -46,7 +46,7 @@ Welcome! This repository is for SHOPPING, an ecommerce site! It serves as a comp
 - PostgreSQL
 - Amazon Web Service
 
-# Other
+#### Other
 
 - Amazon Web Services
 - Netlify
