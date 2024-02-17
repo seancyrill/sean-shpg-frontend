@@ -7,6 +7,7 @@ import { ReactSVG } from "react-svg";
 import ItemPromoBtn from "../../../components/UserShop/ItemPromoBtn";
 import { useAuthContext } from "../../../context/AuthContext";
 import logo from "/images/icon-logo.png";
+import ShopHeader from "../../../components/UserShop/ShopHeader";
 
 function ShopDetails() {
   const { shop_default_img } = useAuthContext();
@@ -16,23 +17,15 @@ function ShopDetails() {
 
   return (
     <div>
-      <div className="flex items-center gap-4 p-4">
-        <img
-          src={shopImg}
-          alt="pfp"
-          className="h-20 w-20 rounded-full border border-Orange"
-        />
-        <div className="">
-          <h1 className="text-4xl font-extrabold">{shopInfo.shop_name}</h1>
-          <p>{shopInfo.shop_email}</p>
-        </div>
-        <Link
-          to={"/controls/shop/settings"}
-          className="smooth-animation -m-2 px-4 py-2 hover:scale-125 hover:brightness-125"
-        >
+      <Link
+        to={"/controls/shop/settings"}
+        className="flex items-center gap-4 p-4"
+      >
+        <ShopHeader shopInfo={shopInfo} defaultImgUrl={shopImg} />
+        <div className="smooth-animation -m-2 px-4 py-2 hover:scale-125 hover:brightness-125">
           <ReactSVG src="/svg/icon-edit.svg" className="fill-Orange" />
-        </Link>
-      </div>
+        </div>
+      </Link>
 
       <div>
         <div className="flex items-center justify-between border-y p-4">

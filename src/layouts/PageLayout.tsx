@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import CartError from "../components/fetchError";
 import LoadingSpinner from "../components/LoadingSpinner";
-import SecondNav from "../components/SecondNav";
 
 export default function PageLayout() {
   const { refreshAccessToken, fetchErrModal, setFetchErrModal, authLoading } =

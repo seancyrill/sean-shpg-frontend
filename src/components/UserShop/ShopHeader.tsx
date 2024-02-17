@@ -12,10 +12,14 @@ function ShopHeader({ shopInfo, defaultImgUrl }: ShopHeaderType) {
 
   return (
     <>
-      <div className="h-20 w-20 rounded-full border border-Orange object-cover">
-        <img src={shopImg} alt="shopImg" className="h-full w-full" />
+      <div className="h-20 w-20 overflow-hidden rounded-full border border-Orange">
+        <img
+          src={shopImg}
+          alt="shopImg"
+          className="h-full w-full object-cover"
+        />
       </div>
-      <div className="flex flex-col overflow-hidden text-left">
+      <div className="col-span-2 flex flex-col overflow-hidden text-left">
         <h1 className="w-full text-2xl font-extrabold text-Orange md:text-3xl">
           {shop_name}
         </h1>

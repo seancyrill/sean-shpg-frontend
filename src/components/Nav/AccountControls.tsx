@@ -27,7 +27,7 @@ export default function AccountControls() {
         setShowAccountControls(false);
       }}
       onClick={handleToggle}
-      className="grid cursor-pointer place-content-center px-2"
+      className="z-40 grid cursor-pointer place-content-center px-2"
     >
       <div className="relative grid place-content-center">
         <ReactSVG

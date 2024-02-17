@@ -232,7 +232,7 @@ function ShopSettings() {
             <p className="absolute left-0 top-1/2 m-4 -translate-x-1/2 -rotate-90 text-Dark-grayish-blue">
               Preview
             </p>
-            <div className="m-auto flex h-fit w-fit max-w-[310px] items-center gap-4 rounded-xl border border-Very-dark-blue bg-White p-6 shadow-lg">
+            <div className="m-auto grid max-w-[310px] grid-cols-3 items-center gap-4 rounded-xl border border-Very-dark-blue bg-White p-6 shadow-lg">
               <ShopHeader
                 shopInfo={preview}
                 defaultImgUrl={profilePreviewImg()}

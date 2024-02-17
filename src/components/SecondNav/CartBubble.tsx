@@ -12,7 +12,7 @@ export default function CartBubble({ showCart }: CartBubbleType) {
 
   return (
     <section
-      className={`smooth-animation absolute bottom-0 right-0 flex max-h-[600px] min-w-[300px] origin-top-right translate-y-full flex-col rounded-xl bg-White shadow-2xl ${
+      className={`smooth-animation absolute bottom-0 right-0 z-50 flex max-h-[600px] min-w-[300px] origin-top-right translate-y-full flex-col rounded-xl bg-White shadow-2xl ${
         !showCart && "scale-0"
       }`}
     >

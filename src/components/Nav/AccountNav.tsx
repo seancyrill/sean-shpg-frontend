@@ -44,7 +44,9 @@ function AccountNav() {
         {!shop_id ? (
           <ReactSVG src="/svg/icon-merchant.svg" className="fill-current" />
         ) : (
-          <img src={shopImg} className="h-8 w-8 rounded-full" />
+          <div className="h-8 w-8 overflow-hidden rounded-full">
+            <img src={shopImg} className="h-full w-full object-cover" />
+          </div>
         )}
         <p className="hidden md:block">{handleLinkText()}</p>
       </Link>
@@ -57,7 +59,9 @@ function AccountNav() {
           to={"/controls/user"}
           className="smooth-animation flex items-center gap-2 px-2 py-4 text-lg hover:scale-105 hover:text-Orange md:px-4 md:py-8"
         >
-          <img src={userImg} className="h-8 w-8 rounded-full" />
+          <div className="h-8 w-8 overflow-hidden rounded-full">
+            <img src={userImg} className="h-full w-full object-cover" />
+          </div>
           <p className="hidden text-lg md:block">{username}</p>
         </Link>
       )}
