@@ -29,10 +29,6 @@ export default function PageLayout() {
   return (
     <>
       <LoadingSpinner loading={authLoading} />
-      <header>
-        <Nav />
-        <SecondNav />
-      </header>
       <main
         className="mx-auto flex min-h-[80vh] w-full max-w-screen-2xl flex-1 flex-col bg-Light-grayish-blue"
         onDrop={(e) => e.preventDefault()}
@@ -42,6 +38,7 @@ export default function PageLayout() {
           fetchErrModal={fetchErrModal}
           setFetchErrModal={setFetchErrModal}
         />
+        <Nav />
         <Outlet />
       </main>
       <footer className="mt-16">

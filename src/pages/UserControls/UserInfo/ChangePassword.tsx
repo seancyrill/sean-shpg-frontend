@@ -101,7 +101,7 @@ function ChangePassword() {
             <label className="off-screen">Current password</label>
             <input
               placeholder="Current Password"
-              className="h-full w-full"
+                  className="w-full border-none focus:outline-none"
               ref={currentPwRef}
               type={showPw ? "text" : "password"}
               value={input.currentPw}
@@ -132,7 +132,7 @@ function ChangePassword() {
             <div className="input-field flex items-center gap-4">
               <input
                 placeholder="Enter New Password"
-                className="h-full w-full"
+                    className="w-full border-none focus:outline-none"
                 type={showNPw ? "text" : "password"}
                 value={input.newPw}
                 onChange={(e) => setInput({ ...input, newPw: e.target.value })}
@@ -155,7 +155,7 @@ function ChangePassword() {
             <div className="input-field flex items-center gap-4">
               <input
                 placeholder="Cofirm New Password"
-                className="h-full w-full"
+                    className="w-full border-none focus:outline-none"
                 type={showCPw ? "text" : "password"}
                 value={input.confirmNewPw}
                 onChange={(e) =>
