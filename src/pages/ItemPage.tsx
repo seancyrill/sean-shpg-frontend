@@ -58,9 +58,12 @@ export default function ItemPage() {
 
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
   const merchOwner = userShopId === shop_id;
   const howMuchFits = +(window.innerWidth / 200).toFixed() * 2;
   const suggestionCount = howMuchFits > 6 ? howMuchFits : 6;
+  const suggestedFilter =
+    item_tags[0] === "men" || "women" ? item_tags[1] : item_tags[0];
 
   const [isAdded, setIsAdded] = useState(false);
 
@@ -280,7 +283,7 @@ export default function ItemPage() {
               children={
                 <Browsing
                   title="you may also like"
-                  link={`/search/${item_tags[0]}`}
+                  link={`/search/${suggestedFilter}`}
                   count={suggestionCount}
                   nextBatch={true}
                   filter={item_tags[0]}
