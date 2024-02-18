@@ -34,7 +34,7 @@ function PromoForm({ backToShop }: PromoFormType) {
     end_date: ed,
   } = item_info;
 
-  const creatingNew = !dsc;
+  const [creatingNew, setCreatingNew] = useState(!dsc);
   const [error, setError] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -97,11 +97,13 @@ function PromoForm({ backToShop }: PromoFormType) {
 
   function onDelete() {
     setInput(emptyInput);
+    setCreatingNew(true);
   }
 
   //for handling price input and display
   //const discountDisplay =
   //  discount.toLocaleString() === "0" ? "" : discount.toLocaleString();
+
   const [discountString, setdiscountString] = useState(
     discount ? `${discount}` : ""
   );
