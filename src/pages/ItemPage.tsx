@@ -268,7 +268,7 @@ export default function ItemPage() {
             </div>
           </section>
 
-          {/* <section className="flex flex-col gap-8">
+          <section className="flex flex-col gap-8">
             <RatingsSection
               latestReviews={latest_reviews}
               ratingTally={rating_tally}
@@ -297,7 +297,7 @@ export default function ItemPage() {
                 />
               }
             />
-          </section> */}
+          </section>
         </>
       )}
 
