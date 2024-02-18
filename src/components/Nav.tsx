@@ -5,6 +5,7 @@ import { useState } from "react";
 import SideBar from "./Nav/SideBar";
 import LogoSm from "./LogoSm";
 import SecondNav from "./SecondNav";
+import CategoriesDropDown from "./Nav/CategoriesDropDown";
 
 export default function Nav() {
   const [openSideBar, setOpenSideBar] = useState(false);
@@ -20,13 +21,19 @@ export default function Nav() {
               onClick={() => setOpenSideBar(true)}
             />
           </li>
+
           <li className="smooth-animation hidden place-content-center py-1 text-3xl hover:text-Orange md:grid">
             <Logo />
           </li>
           <li className="smooth-animation grid place-content-center py-1 text-3xl hover:text-Orange md:hidden">
             <LogoSm />
           </li>
+
+          <li>
+            <CategoriesDropDown />
+          </li>
         </ul>
+
         <AccountNav />
       </div>
 
