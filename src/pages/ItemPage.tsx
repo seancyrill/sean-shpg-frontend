@@ -62,8 +62,14 @@ export default function ItemPage() {
   const merchOwner = userShopId === shop_id;
   const howMuchFits = +(window.innerWidth / 200).toFixed() * 2;
   const suggestionCount = howMuchFits > 6 ? howMuchFits : 6;
-  const suggestedFilter =
-    item_tags[0] === "men" || "women" ? item_tags[1] : item_tags[0];
+  const suggestedFilter = () => {
+    if (!item_tags.length) return item_name.split(" ").slice(0, 3);
+    if (item_tags.length <= 1) return item_tags[0];
+
+    if (item_tags[0] === "men" || "women") {
+      return item_tags[1];
+    }
+  };
 
   const [isAdded, setIsAdded] = useState(false);
 
@@ -262,7 +268,7 @@ export default function ItemPage() {
             </div>
           </section>
 
-          <section className="flex flex-col gap-8">
+          {/* <section className="flex flex-col gap-8">
             <RatingsSection
               latestReviews={latest_reviews}
               ratingTally={rating_tally}
@@ -283,7 +289,7 @@ export default function ItemPage() {
               children={
                 <Browsing
                   title="you may also like"
-                  link={`/search/${suggestedFilter}`}
+                  link={`/search/${suggestedFilter()}`}
                   count={suggestionCount}
                   nextBatch={true}
                   filter={item_tags[0]}
@@ -291,7 +297,7 @@ export default function ItemPage() {
                 />
               }
             />
-          </section>
+          </section> */}
         </>
       )}
 
