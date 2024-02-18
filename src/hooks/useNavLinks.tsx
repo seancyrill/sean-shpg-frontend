@@ -37,12 +37,20 @@ function useNavLinks() {
       linkHeader: "Categories",
       links: [
         {
-          name: "Men",
-          to: "/search/men",
+          name: "Fashion",
+          to: "/search/fashion",
         },
         {
-          name: "Women",
-          to: "/search/women",
+          name: "Home",
+          to: "/search/home",
+        },
+        {
+          name: "Travel",
+          to: "/search/travel",
+        },
+        {
+          name: "Electronic & Gadgets",
+          to: "/search/electronic",
         },
       ],
     },
