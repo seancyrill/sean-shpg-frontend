@@ -27,7 +27,7 @@ function StarRating({ rating_score, setRating_score }: StarRatingType) {
         return (
           <ReactSVG
             src={
-              rating_score < score - 0.5
+              rating_score < score - 0.4
                 ? "/svg/icon-star-empty.svg"
                 : "/svg/icon-star-full.svg"
             }
