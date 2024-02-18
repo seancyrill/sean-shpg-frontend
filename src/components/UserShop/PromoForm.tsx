@@ -68,12 +68,17 @@ function PromoForm({ backToShop }: PromoFormType) {
   async function handleSubmit() {
     const newPromoInput = {
       ...input,
+      start_date: new Date(`${start_date}T${start_time}`).toISOString(),
+      end_date: new Date(`${end_date}T${end_time}`).toISOString(),
       item_id,
       shop_id,
     };
+    console.log({
+      start: newPromoInput.start_date,
+      end: newPromoInput.end_date,
+    });
     setShopLoading(true);
     try {
-      console.log(newPromoInput);
       await privateReq.post("/promo", newPromoInput);
       setShowModal(true);
     } catch (error) {
