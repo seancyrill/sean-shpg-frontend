@@ -39,6 +39,7 @@ export default function Browsing({
   //root fetch function
   async function fetchItems(controller: AbortController) {
     if (itemsCountMaxed) return;
+    setIsLoading(true);
     try {
       const response = await basicReq.get(
         `/items${filter ? `/search/${filter}` : ""}`,
