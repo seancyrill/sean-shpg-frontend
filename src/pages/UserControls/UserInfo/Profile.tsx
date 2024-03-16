@@ -146,8 +146,10 @@ function Profile({ newId }: ProfileType) {
     const deleteParams = { relevantId, img, relevantTable };
     setIsLoading(true);
     try {
-      const { user_imgs } = await handleImgDelete(deleteParams);
-      setUserImgs(user_imgs);
+      await handleImgDelete(deleteParams);
+      const removeFromArray =
+        userImgs?.filter(({ img_id }) => img.img_id !== img_id) || [];
+      setUserImgs(removeFromArray);
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.config?.signal?.aborted) return;

@@ -72,10 +72,9 @@ function useImgControls() {
     relevantTable,
   }: HandleImgDeleteType) {
     try {
-      const response = await privateReq.delete(`/imgs/${relevantTable}`, {
+      await privateReq.delete(`/imgs/${relevantTable}`, {
         data: { relevantId, img },
       });
-      return response.data;
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.config?.signal?.aborted) return;

@@ -101,8 +101,10 @@ function ItemImgsForm({
     const deleteParams = { relevantId, img, relevantTable };
     setLoading(true);
     try {
-      const response = await handleImgDelete(deleteParams);
-      setCurrentImages(response.item_imgs);
+      await handleImgDelete(deleteParams);
+      const removeFromArray =
+        currentImages?.filter(({ img_id }) => img.img_id !== img_id) || [];
+      setCurrentImages(removeFromArray);
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.config?.signal?.aborted) return;

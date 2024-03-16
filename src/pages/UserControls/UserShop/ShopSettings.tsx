@@ -133,8 +133,10 @@ function ShopSettings() {
     const deleteParams = { relevantId, img, relevantTable };
     setIsLoading(true);
     try {
-      const { shop_imgs } = await handleImgDelete(deleteParams);
-      setShopImgs(shop_imgs);
+      await handleImgDelete(deleteParams);
+      const removeFromArray =
+        shopImgs?.filter(({ img_id }) => img.img_id !== img_id) || [];
+      setShopImgs(removeFromArray);
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.config?.signal?.aborted) return;
