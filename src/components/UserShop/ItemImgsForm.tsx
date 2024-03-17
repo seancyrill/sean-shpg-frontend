@@ -210,7 +210,7 @@ function ItemImgsForm({
             {currentImages.map((img, i) => {
               return (
                 <div
-                  className={`relative flex h-24 w-16 flex-col place-content-center border border-Dark-grayish-blue bg-Light-grayish-blue hover:scale-95 ${
+                  className={`relative flex h-24 w-16 flex-col place-content-center overflow-hidden border border-Dark-grayish-blue bg-Light-grayish-blue hover:scale-95 ${
                     defaultImg.imgStatus === "existing" &&
                     defaultImg.img_id === img.img_id &&
                     "border-2 border-Orange"

@@ -132,7 +132,7 @@ function ProfileImgControl({
                     <p className="text-center text-xs text-Green">current</p>
                   )}
                   <div
-                    className={`relative flex h-24 w-16 flex-col place-content-center border border-Dark-grayish-blue bg-Light-grayish-blue hover:scale-95 ${
+                    className={`relative flex h-24 w-16 flex-col place-content-center overflow-hidden border border-Dark-grayish-blue bg-Light-grayish-blue hover:scale-95 ${
                       current && "border-2 border-Green"
                     } ${toDefault === img.img_id && "border-2 border-Orange"}`}
                   >
