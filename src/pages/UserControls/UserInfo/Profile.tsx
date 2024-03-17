@@ -148,7 +148,9 @@ function Profile({ newId }: ProfileType) {
     try {
       await handleImgDelete(deleteParams);
       const removeFromArray =
-        userImgs?.filter(({ img_id }) => img.img_id !== img_id) || [];
+        userImgs && userImgs.length
+          ? userImgs.filter(({ img_id }) => img.img_id !== img_id)
+          : [];
       setUserImgs(removeFromArray);
     } catch (error) {
       if (isAxiosError(error)) {
@@ -171,7 +173,7 @@ function Profile({ newId }: ProfileType) {
           <img
             src={profilePreviewImg()}
             alt="pfp"
-            className="m-auto h-20 w-20 rounded-full border border-Orange"
+            className="m-auto h-20 w-20 rounded-full border border-Orange object-cover"
           />
           <p className="text-2xl font-bold capitalize text-Orange">
             {username}

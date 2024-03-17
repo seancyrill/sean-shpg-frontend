@@ -103,7 +103,10 @@ function ItemImgsForm({
     try {
       await handleImgDelete(deleteParams);
       const removeFromArray =
-        currentImages?.filter(({ img_id }) => img.img_id !== img_id) || [];
+        currentImages && currentImages.length
+          ? currentImages.filter(({ img_id }) => img.img_id !== img_id)
+          : [];
+      console.log({ removeFromArray, currentImages });
       setCurrentImages(removeFromArray);
     } catch (error) {
       if (isAxiosError(error)) {
@@ -218,7 +221,7 @@ function ItemImgsForm({
                     src={img.thumbnail_url}
                     onClick={() => setExsToDef(img.img_id)}
                     alt="Current Img"
-                    className="m-auto h-full w-full flex-1 object-contain"
+                    className="m-auto h-full w-full flex-1 object-cover"
                   />
                   <GenericDelete
                     handleDelete={() =>

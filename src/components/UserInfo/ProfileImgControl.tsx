@@ -140,7 +140,7 @@ function ProfileImgControl({
                       src={img.img_url}
                       onClick={() => setToDefault(img.img_id)}
                       alt="Current Img"
-                      className="m-auto h-full w-full flex-1 object-contain"
+                      className="m-auto h-full w-full flex-1 object-cover"
                     />
                     <GenericDelete
                       handleDelete={() => deleteImg(img)}

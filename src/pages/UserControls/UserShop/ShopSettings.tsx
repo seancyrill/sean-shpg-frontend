@@ -135,7 +135,9 @@ function ShopSettings() {
     try {
       await handleImgDelete(deleteParams);
       const removeFromArray =
-        shopImgs?.filter(({ img_id }) => img.img_id !== img_id) || [];
+        shopImgs && shopImgs.length
+          ? shopImgs.filter(({ img_id }) => img.img_id !== img_id)
+          : [];
       setShopImgs(removeFromArray);
     } catch (error) {
       if (isAxiosError(error)) {
