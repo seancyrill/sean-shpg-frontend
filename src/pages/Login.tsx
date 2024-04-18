@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { ReactSVG } from "react-svg";
+import SignInGoogle from "../components/Login/SignInGoogle";
 
 export default function Login() {
   const {
@@ -17,6 +18,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [showPw, setShowPw] = useState(false);
 
+  const testAcc = { username: "test", password: "!Test123" };
   const emptyInput = { username: "", password: "" };
   const [loginInput, setLoginInput] = useState(emptyInput);
   const disableLogin =
@@ -123,13 +125,35 @@ export default function Login() {
       </form>
 
       <div className="mt-4 flex min-w-[320px] flex-col gap-4 rounded-sm bg-White p-6 shadow-md">
+        <button
+          onClick={(e) => (e.preventDefault(), handleSubmit(testAcc))}
+          className="secondary-button flex items-center text-center font-bold text-White"
+        >
+          <ReactSVG
+            src="/svg/icon-star-full.svg"
+            className="scale-[110%] fill-White"
+          />
+          <p className="w-full">Test Account</p>
+        </button>
+        <button
+          onClick={(e) => (e.preventDefault(), handleSubmit(loginInput))}
+          className="secondary-button flex items-center bg-Orange text-center font-bold invert"
+        >
+          <ReactSVG src="" />
+          <p className="w-full">Facebook</p>
+        </button>
+
+        <SignInGoogle />
+      </div>
+
+      <div className="mt-4 flex min-w-[320px] flex-col gap-4 rounded-sm bg-White p-6 shadow-md">
         <Link
           to={"/registrar/register"}
           state={from}
           replace
           className="secondary-button text-center text-White"
         >
-          Create new Account
+          Create a new <span className="font-bold text-Orange">Account</span>
         </Link>
       </div>
 

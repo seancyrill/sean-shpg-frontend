@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import { ShoppingCartProvider } from "./context/ShoppingCartContext.tsx";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 //if (process.env.NODE_ENV === 'production') {
 disableReactDevTools();
@@ -13,14 +14,17 @@ disableReactDevTools();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <ShoppingCartProvider>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </ShoppingCartProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={import.meta.env.ENV_GOOGLE_CLIENT_ID}>
+      <BrowserRouter>
+        <AuthProvider>
+          <ShoppingCartProvider>
+            <Routes>
+              <Route path="/*" element={<App />} />
+            </Routes>
+          </ShoppingCartProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
+    ;
   </React.StrictMode>
 );

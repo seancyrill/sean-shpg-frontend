@@ -79,7 +79,7 @@ export function AuthProvider({ children }: ProviderType) {
   };
 
   //// request handlers ////
-  const base_URL = import.meta.env.API_URL;
+  const base_URL = import.meta.env.ENV_API_URL;
   //for public req
   const basicReq = axios.create({
     baseURL: base_URL,
