@@ -12,12 +12,12 @@ function SideBar({ isOpen, onClose }: SideBarType) {
   return (
     <div
       onClick={onClose}
-      className={`smooth-animation fixed inset-0 z-50 overflow-scroll bg-Very-dark-blue bg-opacity-75 ${
+      className={`smooth-animation fixed inset-0 z-50 bg-Very-dark-blue bg-opacity-75 ${
         isOpen ? "translate-x-0" : "-translate-x-[100vw]"
       }`}
     >
       <div
-        className={`smooth-animation absolute left-0 top-0 h-full w-64 gap-8 bg-White shadow ${
+        className={`smooth-animation absolute left-0 top-0 h-full w-64 gap-8 overflow-auto bg-White shadow ${
           isOpen ? "translate-x-0" : "-translate-x-[100vw]"
         }`}
       >
