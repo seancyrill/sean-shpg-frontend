@@ -135,13 +135,6 @@ export default function Login() {
           />
           <p className="w-full">Test Account</p>
         </button>
-        <button
-          onClick={(e) => (e.preventDefault(), handleSubmit(loginInput))}
-          className="secondary-button flex items-center bg-Orange text-center font-bold invert"
-        >
-          <ReactSVG src="" />
-          <p className="w-full">Facebook</p>
-        </button>
 
         <SignInGoogle />
       </div>

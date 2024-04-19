@@ -20,7 +20,7 @@ function SignInGoogle() {
       setToken(response.data.accessToken);
       success = true;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setFetchErrModal(true);
     } finally {
       setAuthLoading(true);
@@ -42,8 +42,8 @@ function SignInGoogle() {
         }
       );
 
-      const { email, picture } = response.data;
-      await handleGoogleSignIn({ username: email, img: picture });
+      const { email } = response.data;
+      await handleGoogleSignIn({ username: email });
     },
     onError: (error) => {
       console.error(error);
@@ -53,7 +53,7 @@ function SignInGoogle() {
 
   return (
     <button
-      onClick={() => handleClick()}
+      onClick={(e) => (e.preventDefault(), handleClick())}
       className="secondary-button flex items-center border bg-transparent
         text-center font-bold"
     >

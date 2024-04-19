@@ -175,9 +175,7 @@ function Profile({ newId }: ProfileType) {
             alt="pfp"
             className="m-auto h-20 w-20 rounded-full border border-Orange object-cover"
           />
-          <p className="text-2xl font-bold capitalize text-Orange">
-            {username}
-          </p>
+          <p className="text-2xl font-bold text-Orange">{username}</p>
           {shop_id !== null && (
             <Link
               to={"/controls/shop"}
