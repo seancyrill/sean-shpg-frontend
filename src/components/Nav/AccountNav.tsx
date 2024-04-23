@@ -33,38 +33,37 @@ function AccountNav() {
   };
 
   return (
-    <div className="flex h-full items-center">
+    <div className="flex h-full max-w-[50%] items-center">
       {/* Merch button */}
       <Link
         to={handleLinkTo()}
         replace
         state={"/controls/newshop"}
-        className="smooth-animation flex items-center gap-2 px-2 py-4 text-lg hover:scale-105 hover:text-Orange md:px-4 md:py-8"
+        className="smooth-animation flex max-w-[200px] items-center gap-2 overflow-hidden px-2 py-4 text-lg hover:scale-105 hover:text-Orange md:px-4 md:py-8"
       >
         {!shop_id ? (
           <ReactSVG src="/svg/icon-merchant.svg" className="fill-current" />
         ) : (
-          <div className="h-8 w-8 overflow-hidden rounded-full">
-            <img src={shopImg} className="h-full w-full object-cover" />
-          </div>
+          <img src={shopImg} className="h-8 w-8 rounded-full object-cover" />
         )}
-        <p className="hidden md:block">{handleLinkText()}</p>
+        <p className="hidden whitespace-nowrap lg:block">{handleLinkText()}</p>
       </Link>
-
-      <div className="h-10 border-r border-Dark-grayish-blue" />
 
       {/* User buttons */}
       {token && (
         <Link
           to={"/controls/user"}
-          className="smooth-animation flex items-center gap-2 px-2 py-4 text-lg hover:scale-105 hover:text-Orange md:px-4 md:py-8"
+          className="smooth-animation flex max-w-[200px] items-center gap-2 overflow-hidden px-2 py-4 text-lg hover:scale-105 hover:text-Orange md:px-4 md:py-8"
         >
-          <div className="h-8 w-8 overflow-hidden rounded-full">
-            <img src={userImg} className="h-full w-full object-cover" />
-          </div>
-          <p className="hidden text-lg md:block">{username}</p>
+          <img src={userImg} className="h-8 w-8 object-cover" />
+          <p className="hidden whitespace-nowrap text-lg lg:block">
+            {username}
+          </p>
         </Link>
       )}
+
+      <div className="mx-2 h-10 border-r border-Dark-grayish-blue sm:mx-4" />
+
       <AccountControls />
     </div>
   );
