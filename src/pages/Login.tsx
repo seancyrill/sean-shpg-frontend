@@ -1,74 +1,66 @@
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { ReactSVG } from "react-svg";
-import SignInGoogle from "../components/Login/SignInGoogle";
+import axios from "axios"
+import { useEffect, useRef, useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useAuthContext } from "../context/AuthContext"
+import LoadingSpinner from "../components/LoadingSpinner"
+import { ReactSVG } from "react-svg"
+import SignInGoogle from "../components/Login/SignInGoogle"
 
 export default function Login() {
-  const {
-    token,
-    setToken,
-    privateReq,
-    authLoading,
-    setAuthLoading,
-    setFetchErrModal,
-  } = useAuthContext();
-  const [error, setError] = useState(null);
-  const [showPw, setShowPw] = useState(false);
+  const { token, setToken, privateReq, authLoading, setAuthLoading, setFetchErrModal } =
+    useAuthContext()
+  const [error, setError] = useState(null)
+  const [showPw, setShowPw] = useState(false)
 
-  const testAcc = { username: "test", password: "!Test123" };
-  const emptyInput = { username: "", password: "" };
-  const [loginInput, setLoginInput] = useState(emptyInput);
+  const testAcc = { username: "test", password: "!Test123" }
+  const emptyInput = { username: "", password: "" }
+  const [loginInput, setLoginInput] = useState(emptyInput)
   const disableLogin =
-    loginInput.username.length > 0 && loginInput.password.length > 0
-      ? false
-      : true;
+    loginInput.username.length > 0 && loginInput.password.length > 0 ? false : true
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state || "/";
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state || "/"
 
   async function handleSubmit(input: typeof loginInput) {
-    let success = false;
-    setAuthLoading(true);
+    let success = false
+    setAuthLoading(true)
     try {
-      const response = await privateReq.post("/auth", input);
-      setToken(response.data.accessToken);
-      setLoginInput(emptyInput);
-      setError(null);
-      success = true;
+      const response = await privateReq.post("/auth", input)
+      setToken(response.data.accessToken)
+      setLoginInput(emptyInput)
+      setError(null)
+      success = true
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.error(error.message);
-        setError(error.response?.data.message);
+        console.error(error.message)
+        setError(error.response?.data.message)
       } else {
-        console.error(error);
+        console.error(error)
       }
-      setFetchErrModal(true);
+      setFetchErrModal(true)
     } finally {
       if (success) {
         //setTimeout(() => {
-        navigate(from, { replace: true });
+        navigate(from, { replace: true })
         //}, 100);
       }
-      setAuthLoading(false);
+      setAuthLoading(false)
     }
   }
 
   //redirects if already logged in
   useEffect(() => {
     if (token) {
-      navigate(from, { replace: true });
+      navigate(from, { replace: true })
     }
-  }, [token]);
+  }, [token])
 
-  const usernameRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null)
   //focus on usename input on load
   useEffect(() => {
-    usernameRef.current?.focus();
-  }, []);
+    usernameRef.current?.focus()
+  }, [])
 
   return (
     <div>
@@ -86,9 +78,7 @@ export default function Login() {
             ref={usernameRef}
             type="text"
             value={loginInput.username}
-            onChange={(e) =>
-              setLoginInput({ ...loginInput, username: e.target.value })
-            }
+            onChange={(e) => setLoginInput({ ...loginInput, username: e.target.value })}
           />
           <div className="input-field flex items-center gap-1 pr-1">
             <label className="off-screen">Password</label>
@@ -98,9 +88,7 @@ export default function Login() {
               placeholder="Password"
               type={showPw ? "text" : "password"}
               value={loginInput.password}
-              onChange={(e) =>
-                setLoginInput({ ...loginInput, password: e.target.value })
-              }
+              onChange={(e) => setLoginInput({ ...loginInput, password: e.target.value })}
             />
             <ReactSVG
               src={`/svg/icon-show-${showPw ? "off" : "on"}.svg`}
@@ -108,11 +96,7 @@ export default function Login() {
               onClick={() => setShowPw((prev) => !prev)}
             />
           </div>
-          {error && (
-            <p className="border border-Soft-Red px-4 py-2 text-Soft-Red">
-              {error}
-            </p>
-          )}
+          {error && <p className="border border-Soft-Red px-4 py-2 text-Soft-Red">{error}</p>}
         </div>
 
         <button
@@ -129,10 +113,7 @@ export default function Login() {
           onClick={(e) => (e.preventDefault(), handleSubmit(testAcc))}
           className="secondary-button flex items-center text-center font-bold text-White"
         >
-          <ReactSVG
-            src="/svg/icon-star-full.svg"
-            className="scale-[110%] fill-White"
-          />
+          <ReactSVG src="/svg/icon-star-full.svg" className="scale-[110%] fill-White" />
           <p className="w-full">Test Account</p>
         </button>
 
@@ -152,5 +133,5 @@ export default function Login() {
 
       <LoadingSpinner loading={authLoading} />
     </div>
-  );
+  )
 }

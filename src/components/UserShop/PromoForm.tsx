@@ -1,48 +1,39 @@
-import { useEffect, useRef, useState } from "react";
-import ItemBubble from "../ItemBubble";
-import DeletePromo from "./DeletePromo";
-import { useParams } from "react-router-dom";
-import { useAuthContext } from "../../context/AuthContext";
-import { useShopContext } from "../../pages/UserControls/UserShop";
-import { timeStampToLocal } from "../../utilities/timeStampToLocal";
-import { isAxiosError } from "axios";
-import SuccessModal from "./SuccessModal";
+import { useEffect, useRef, useState } from "react"
+import ItemBubble from "../ItemBubble"
+import DeletePromo from "./DeletePromo"
+import { useParams } from "react-router-dom"
+import { useAuthContext } from "../../context/AuthContext"
+import { useShopContext } from "../../pages/UserControls/UserShop"
+import { timeStampToLocal } from "../../utilities/timeStampToLocal"
+import { isAxiosError } from "axios"
+import SuccessModal from "./SuccessModal"
 
 export type PromoInputType = {
-  discount: number;
-  start_date: string;
-  start_time: string;
-  end_date: string;
-  end_time: string;
-};
+  discount: number
+  start_date: string
+  start_time: string
+  end_date: string
+  end_time: string
+}
 
 type PromoFormType = {
-  backToShop: () => void;
-};
+  backToShop: () => void
+}
 
 function PromoForm({ backToShop }: PromoFormType) {
-  const { id } = useParams();
-  const { privateReq, shop_id, setFetchErrModal } = useAuthContext();
-  const { shopItems, setShopLoading } = useShopContext();
+  const { id } = useParams()
+  const { privateReq, shop_id, setFetchErrModal } = useAuthContext()
+  const { shopItems, setShopLoading } = useShopContext()
 
-  const item_info = shopItems.find((item) => item.item_id === +id!)!;
-  const {
-    item_id,
-    item_name,
-    discount: dsc,
-    start_date: sd,
-    end_date: ed,
-  } = item_info;
+  const item_info = shopItems.find((item) => item.item_id === +id!)!
+  const { item_id, item_name, discount: dsc, start_date: sd, end_date: ed } = item_info
 
-  const [creatingNew, setCreatingNew] = useState(!dsc);
-  const [error, setError] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState(false);
+  const [creatingNew, setCreatingNew] = useState(!dsc)
+  const [error, setError] = useState<string | null>(null)
+  const [showModal, setShowModal] = useState(false)
 
-  const { localDate: localStartDate, localTime: localStartTime } =
-    timeStampToLocal(sd!);
-  const { localDate: localEndDate, localTime: localEndTime } = timeStampToLocal(
-    ed!
-  );
+  const { localDate: localStartDate, localTime: localStartTime } = timeStampToLocal(sd!)
+  const { localDate: localEndDate, localTime: localEndTime } = timeStampToLocal(ed!)
   const emptyInput = {
     discount: 0,
     start_date: "",
@@ -50,7 +41,7 @@ function PromoForm({ backToShop }: PromoFormType) {
     end_date: "",
     end_time: "18:00",
     promo_group_id: null,
-  };
+  }
   const initInput = {
     discount: dsc!,
     start_date: localStartDate,
@@ -58,12 +49,10 @@ function PromoForm({ backToShop }: PromoFormType) {
     end_date: localEndDate,
     end_time: localEndTime,
     promo_group_id: null,
-  };
+  }
 
-  const [input, setInput] = useState<PromoInputType>(
-    dsc ? initInput : emptyInput
-  );
-  const { discount, end_date, end_time, start_date, start_time } = input;
+  const [input, setInput] = useState<PromoInputType>(dsc ? initInput : emptyInput)
+  const { discount, end_date, end_time, start_date, start_time } = input
 
   async function handleSubmit() {
     const newPromoInput = {
@@ -72,50 +61,45 @@ function PromoForm({ backToShop }: PromoFormType) {
       end_date: new Date(`${end_date}T${end_time}`).toISOString(),
       item_id,
       shop_id,
-    };
-    console.log({
-      start: newPromoInput.start_date,
-      end: newPromoInput.end_date,
-    });
-    setShopLoading(true);
+    }
+
+    setShopLoading(true)
     try {
-      await privateReq.post("/promo", newPromoInput);
-      setShowModal(true);
+      await privateReq.post("/promo", newPromoInput)
+      setShowModal(true)
     } catch (error) {
       if (isAxiosError(error)) {
-        if (error.config?.signal?.aborted) return;
-        console.error(error.response?.data);
-        return setError(error.response?.data?.message);
+        if (error.config?.signal?.aborted) return
+        console.error(error.response?.data)
+        return setError(error.response?.data?.message)
       } else {
-        console.error(error);
+        console.error(error)
       }
-      setFetchErrModal(true);
+      setFetchErrModal(true)
     } finally {
-      setShopLoading(false);
+      setShopLoading(false)
     }
   }
 
   function onDelete() {
-    setInput(emptyInput);
-    setCreatingNew(true);
+    setInput(emptyInput)
+    setCreatingNew(true)
   }
 
   //for handling price input and display
   //const discountDisplay =
   //  discount.toLocaleString() === "0" ? "" : discount.toLocaleString();
 
-  const [discountString, setdiscountString] = useState(
-    discount ? `${discount}` : ""
-  );
+  const [discountString, setdiscountString] = useState(discount ? `${discount}` : "")
   function discountStringChange(val: string) {
     //const pattern = /^[\d]{0,2}(\.[\d]{0,2})?$/;
-    const pattern = /^[\d]{0,2}?$/;
+    const pattern = /^[\d]{0,2}?$/
     if (pattern.test(val)) {
-      setdiscountString(val);
+      setdiscountString(val)
       setInput({
         ...input,
         discount: +val,
-      });
+      })
     }
   }
 
@@ -124,11 +108,11 @@ function PromoForm({ backToShop }: PromoFormType) {
     discount: input.discount,
     start_date: new Date().toISOString(),
     end_date: new Date(`${new Date().getFullYear() + 1}`).toISOString(),
-  };
-  const autoFocus = useRef<HTMLInputElement>(null);
+  }
+  const autoFocus = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    autoFocus.current?.focus();
-  }, []);
+    autoFocus.current?.focus()
+  }, [])
 
   return (
     <div className="flex flex-1 flex-col-reverse border-y md:flex-row">
@@ -164,9 +148,7 @@ function PromoForm({ backToShop }: PromoFormType) {
               type="date"
               //min={today}
               value={start_date}
-              onChange={(e) =>
-                setInput({ ...input, start_date: e.target.value })
-              }
+              onChange={(e) => setInput({ ...input, start_date: e.target.value })}
               className="input-field flex-1"
             />
             <label className="off-screen">Start-Time</label>
@@ -174,9 +156,7 @@ function PromoForm({ backToShop }: PromoFormType) {
               required
               type="time"
               value={start_time}
-              onChange={(e) =>
-                setInput({ ...input, start_time: e.target.value })
-              }
+              onChange={(e) => setInput({ ...input, start_time: e.target.value })}
               className="input-field"
             />
           </fieldset>
@@ -222,7 +202,7 @@ function PromoForm({ backToShop }: PromoFormType) {
         backToShop={backToShop}
       />
     </div>
-  );
+  )
 }
 
-export default PromoForm;
+export default PromoForm
